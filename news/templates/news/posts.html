@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}<title>{{post_all.title}}</title>{% endblock %}
+    
+{% block sitebar %}
+<div class="col-md-4">
+    <div class="list-group">
+        {% for categ in category %}
+            <a href="{{categ.get_absolute_url}}" class="list-group-item list-group-item-action">{{categ.title}}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-8">
+        <div class="card mb-3">
+            <div class="card-header">
+                <a href="{{post_all.category.get_absolute_url}}">{{post_all.category}}</a>
+            </div>
+            <div class="card-body">
+                <div class="media">
+                    <img src="{{ post_all.photo.url }}" width="350" class="mr-3" height="250">
+                    <div class="media-body">
+                        <h5 class="card-title">{{post_all.title}}</h5>
+                        <p class="card-text">{{post_all.content}}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <a href="{% url 'update_post' post_all.id %}" class='btn btn-info'>Update</a>
+                    <a href="{% url 'delete_post' post_all.id %}" class='btn btn-danger'>Delete</a>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                {{post_all.created_at|date}}
+            </div>
+            
+        </div>
+</div>
+{% endblock %}

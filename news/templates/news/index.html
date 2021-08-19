@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Hello, world!</title>{% endblock %}
+    
+{% block sitebar %}
+<div class="col-md-4">
+    <div class="list-group">
+        {% for categ in category %}
+            <a href="{{categ.get_absolute_url}}" class="list-group-item list-group-item-action">{{categ.title}}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-8">
+    {% for elem in post %}
+        <div class="card mb-3">
+            <div class="card-header">
+                <a href="{{elem.category.get_absolute_url}}">{{elem.category}}</a>
+            </div>
+            <div class="card-body">
+                <div class="media">
+                    <img src="{{ elem.photo.url }}" width="350" class="mr-3" height="250">
+                    <div class="media-body">
+                        <h5 class="card-title">{{elem.title}}</h5>
+                        <p class="card-text">{{elem.content}}</p>
+                        <a href="{{ elem.get_absolute_url }}" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                {{elem.created_at|date}}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

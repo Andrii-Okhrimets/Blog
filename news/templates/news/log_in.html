@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Hello, world!</title>{% endblock %}
+    
+{% block sitebar %}
+<div class="col-md-4">
+    <div class="list-group">
+        {% for categ in category %}
+            <a href="{{categ.get_absolute_url}}" class="list-group-item list-group-item-action">{{categ.title}}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+{% endblock %}
